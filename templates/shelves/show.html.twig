@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Shelves{% endblock %}
+
+{% block body %}
+    {{ include('views/header.html.twig') }}
+    <h1>Shelves</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ shelf.id }}</td>
+            </tr>
+            <tr>
+                <th>Title</th>
+                <td>{{ shelf.title }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ shelf.description }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_shelves_index') }}">back to list</a>
+
+    <a href="{{ path('app_shelves_edit', {'id': shelf.id}) }}">edit</a>
+
+    {{ include('shelves/_delete_form.html.twig') }}
+    {{ include('views/footer.html.twig') }}
+{% endblock %}

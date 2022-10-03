@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Shelves index{% endblock %}
+
+{% block body %}
+    
+    {{ include('views/header.html.twig') }}
+    {% for message in app.flashes('info') %}
+        <div class="alert alert-success">
+            {{message}}
+        </div>
+    {% endfor %}
+    <h1>Shelves index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Image</th>
+                <th>Title</th>
+                <th>Description</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for shelf in shelves %}
+            <tr>
+                <td>{{ shelf.id }}</td>
+                <td><img width=100 height=100 src="{{asset('uploads/') ~ shelf.filename}}"</td>
+                <td>{{ shelf.title }}</td>
+                <td>{{ shelf.description }}</td>
+                <td>
+                    <a href="{{ path('app_shelves_show', {'id': shelf.id}) }}">show</a>
+                    <a href="{{ path('app_shelves_edit', {'id': shelf.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_shelves_new') }}">Create new</a>
+    
+    {{ include('views/footer.html.twig') }}
+{% endblock %}
